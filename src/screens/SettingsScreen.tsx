@@ -29,6 +29,7 @@ import {
   ShieldCheck,
   ChevronRight,
   Sparkles,
+  Smartphone,
 } from 'lucide-react-native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -43,6 +44,7 @@ export const SettingsScreen: React.FC = () => {
   const [shortcutsCount, setShortcutsCount] = useState(0);
   const [isSecured, setIsSecured] = useState(false);
   const [isCamouflaged, setIsCamouflaged] = useState(false);
+  const [disguiseName, setDisguiseName] = useState('Calculator');
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
@@ -67,6 +69,7 @@ export const SettingsScreen: React.FC = () => {
 
     const prefs = await storage.getCalculatorPreferences();
     setIsCamouflaged(prefs.hideSentinelBadge);
+    setDisguiseName(prefs.disguiseAppName || 'Calculator');
 
     const sub = await storage.getSubscription();
     setIsPremium(sub.isPremium);
@@ -239,8 +242,39 @@ export const SettingsScreen: React.FC = () => {
             { color: theme.textMuted, marginTop: 14 },
           ]}
         >
-          STEALTH & ACCESS CONTROLS
+          STEALTH & DISGUISE CONTROLS
         </Text>
+
+        {/* App Name & Icon Disguise */}
+        <Card
+          onPress={() => navigation.navigate('AppDisguise')}
+          style={styles.card}
+        >
+          <View style={styles.row}>
+            <View
+              style={[
+                styles.iconCircle,
+                { backgroundColor: 'rgba(10, 132, 255, 0.15)' },
+              ]}
+            >
+              <Smartphone size={20} color={theme.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[typography.h3, { color: theme.text }]}>
+                App Name & Icon Disguise
+              </Text>
+              <Text
+                style={[
+                  typography.bodySmall,
+                  { color: theme.textSecondary, marginTop: 2 },
+                ]}
+              >
+                Displaying as: "{disguiseName}"
+              </Text>
+            </View>
+            <ChevronRight size={20} color={theme.textMuted} />
+          </View>
+        </Card>
 
         {/* Camouflage & Gestures */}
         <Card
@@ -312,26 +346,27 @@ export const SettingsScreen: React.FC = () => {
             { color: theme.textMuted, marginTop: 14 },
           ]}
         >
-          THEME & APPEARANCE
+          APP PREFERENCES
         </Text>
 
+        {/* Theme Switch */}
         <Card style={styles.card}>
           <View style={styles.row}>
             <View
               style={[
                 styles.iconCircle,
-                { backgroundColor: theme.surfaceElevated },
+                { backgroundColor: 'rgba(255, 214, 10, 0.15)' },
               ]}
             >
               {isDark ? (
-                <Moon size={20} color={theme.text} />
+                <Moon size={20} color="#FFD60A" />
               ) : (
-                <Sun size={20} color={theme.text} />
+                <Sun size={20} color="#FF9F0A" />
               )}
             </View>
             <View style={{ flex: 1 }}>
               <Text style={[typography.h3, { color: theme.text }]}>
-                {isDark ? 'Dark Mode' : 'Light Mode'}
+                Dark Mode
               </Text>
               <Text
                 style={[
@@ -339,7 +374,7 @@ export const SettingsScreen: React.FC = () => {
                   { color: theme.textSecondary, marginTop: 2 },
                 ]}
               >
-                Toggle calculator theme interface
+                High-contrast OLED black theme
               </Text>
             </View>
             <Switch
@@ -349,6 +384,24 @@ export const SettingsScreen: React.FC = () => {
             />
           </View>
         </Card>
+
+        {/* Sentinel Shield Info Footer */}
+        <View style={styles.footer}>
+          <View style={styles.footerBrand}>
+            <ShieldCheck size={18} color={theme.primary} style={{ marginRight: 6 }} />
+            <Text style={[typography.h3, { color: theme.text, fontSize: 14 }]}>
+              Sentinel Safety Engine v1.0.0
+            </Text>
+          </View>
+          <Text
+            style={[
+              typography.bodySmall,
+              { color: theme.textMuted, textAlign: 'center', marginTop: 4 },
+            ]}
+          >
+            Calculate normally. Be ready when it matters.
+          </Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -363,15 +416,19 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   premiumCard: {
-    marginBottom: 16,
+    marginBottom: 20,
   },
   premiumHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  card: {
+  sectionTitle: {
     marginBottom: 8,
+    paddingHorizontal: 4,
+  },
+  card: {
+    marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
@@ -385,8 +442,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 14,
   },
-  sectionTitle: {
-    marginBottom: 8,
-    paddingHorizontal: 4,
+  footer: {
+    marginTop: 24,
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+  footerBrand: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

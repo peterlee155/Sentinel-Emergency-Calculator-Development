@@ -112,8 +112,9 @@ flowchart TD
 - **Recipient Control**: Broadcast to **All Contacts** simultaneously or target individual recipients.
 
 ### 3. 🕵️ Stealth & Camouflage Mode
+- **Custom App Name & Icon Disguise**: Customize the in-app persona and home screen launcher identity (`Calculator`, `Calc+`, `Math Pro`, `QuickCalc`, `Simple Calculator`, or any custom name) with 6 visual icon styles (OLED Dark, Classic iOS, Monochrome Light, Retro LCD, Scientific Math, Sentinel Pro) and live phone mockup preview.
 - **Hidden Notification Bar**: Suppresses the top Android/iOS notification bar for a clean, distraction-free display.
-- **Hidden Top Badge**: Disguises the calculator completely by hiding safety branding.
+- **Hidden Top Badge**: Disguises the calculator completely by hiding safety branding or dynamically showing the chosen disguise name.
 - **Fake Math Display**: Replaces the calculator screen with a plausible fake result (e.g. `0` or `42`) when a trigger fires so onlookers see normal math operations.
 - **Secret Access Gestures**: Unlock settings by typing a secret calculation code (e.g. `0000=`) or long-pressing the `=` or `AC` button for 1.5 seconds.
 

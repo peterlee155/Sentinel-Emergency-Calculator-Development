@@ -12,6 +12,7 @@ import { SettingsScreen } from '../screens/SettingsScreen';
 import { ProfilesScreen } from '../screens/ProfilesScreen';
 import { CreateProfileScreen } from '../screens/CreateProfileScreen';
 import { CamouflageSettingsScreen } from '../screens/CamouflageSettingsScreen';
+import { AppDisguiseScreen } from '../screens/AppDisguiseScreen';
 import { SecurityScreen } from '../screens/SecurityScreen';
 import { PaywallScreen } from '../screens/PaywallScreen';
 import { SimulationScreen } from '../screens/SimulationScreen';
@@ -44,6 +45,7 @@ export const RootNavigator: React.FC = () => {
           name="CamouflageSettings"
           component={CamouflageSettingsScreen}
         />
+        <Stack.Screen name="AppDisguise" component={AppDisguiseScreen} />
         <Stack.Screen name="Security" component={SecurityScreen} />
         <Stack.Screen name="Subscription" component={PaywallScreen} />
         <Stack.Screen

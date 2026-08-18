@@ -9,6 +9,7 @@ export type RootStackParamList = {
   CreateProfile: { profileId?: string } | undefined;
   Security: undefined;
   CamouflageSettings: undefined;
+  AppDisguise: undefined;
   Subscription: undefined;
   Simulation: { shortcutId: string };
   Activation: { shortcutId: string; autoTrigger?: boolean };

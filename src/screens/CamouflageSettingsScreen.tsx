@@ -16,10 +16,10 @@ import { Header } from '../components/common/Header';
 import { Card } from '../components/common/Card';
 import storage from '../storage';
 import { CalculatorPreferences } from '../types/calculator';
-import { EyeOff, Key, Sparkles, Sliders, Smartphone, Check } from 'lucide-react-native';
+import { EyeOff, Key, Sparkles, Sliders, Smartphone, Check, ChevronRight } from 'lucide-react-native';
 
 export const CamouflageSettingsScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const { theme, typography, borderRadius } = useTheme();
 
   const [prefs, setPrefs] = useState<CalculatorPreferences | null>(null);
@@ -46,7 +46,9 @@ export const CamouflageSettingsScreen: React.FC = () => {
   };
 
   const handleSave = async () => {
+    if (!prefs) return;
     await storage.saveCalculatorPreferences({
+      ...prefs,
       hideSentinelBadge: hideBadge,
       secretUnlockCode: unlockCode.trim() || '0000=',
       longPressEqualsUnlock: longPressEquals,
@@ -78,7 +80,38 @@ export const CamouflageSettingsScreen: React.FC = () => {
         contentContainerStyle={styles.scroll}
         showsVerticalScrollIndicator={false}
       >
-        {/* Camouflage Mode */}
+        {/* App Name & Launcher Icon Link */}
+        <Card
+          onPress={() => navigation.navigate('AppDisguise')}
+          style={styles.card}
+        >
+          <View style={styles.row}>
+            <View
+              style={[
+                styles.iconCircle,
+                { backgroundColor: 'rgba(10, 132, 255, 0.15)' },
+              ]}
+            >
+              <Smartphone size={22} color={theme.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[typography.h3, { color: theme.text }]}>
+                App Name & Launcher Icon
+              </Text>
+              <Text
+                style={[
+                  typography.bodySmall,
+                  { color: theme.textSecondary, marginTop: 2 },
+                ]}
+              >
+                Customize app display name and disguise icon style
+              </Text>
+            </View>
+            <ChevronRight size={20} color={theme.textMuted} />
+          </View>
+        </Card>
+
+        {/* Camouflage Mode Toggle */}
         <Card variant={hideBadge ? 'warning' : 'default'} style={styles.card}>
           <View style={styles.row}>
             <View
@@ -91,7 +124,7 @@ export const CamouflageSettingsScreen: React.FC = () => {
             </View>
             <View style={{ flex: 1, marginRight: 12 }}>
               <Text style={[typography.h3, { color: theme.text }]}>
-                Hide SENTINEL Badge
+                Hide Top Header Badge
               </Text>
               <Text
                 style={[

@@ -317,7 +317,7 @@ export const CalculatorScreen: React.FC = () => {
           >
             <Shield size={16} color={theme.primary} style={{ marginRight: 6 }} />
             <Text style={[typography.caption, { color: theme.primary, fontWeight: '700', fontSize: 13 }]}>
-              SENTINEL
+              {(preferences.disguiseAppName || 'SENTINEL').toUpperCase()}
             </Text>
           </TouchableOpacity>
         ) : (
