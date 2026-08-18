@@ -23,7 +23,7 @@ import shortcutDetectionService from '../services/shortcuts/shortcutDetectionSer
 import emergencyActionService from '../services/emergency/emergencyActionService';
 import storage from '../storage';
 import * as Haptics from 'expo-haptics';
-import { History, Shield, AlertTriangle, Delete } from 'lucide-react-native';
+import { History, Shield, AlertTriangle } from 'lucide-react-native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -341,35 +341,20 @@ export const CalculatorScreen: React.FC = () => {
           </Text>
         ) : null}
 
-        <View style={styles.displayRow}>
-          {state.displayValue !== '0' && (
-            <TouchableOpacity
-              onPress={handleBackspace}
-              style={[
-                styles.displayBackspaceBtn,
-                { backgroundColor: theme.surfaceElevated, borderColor: theme.surfaceBorder },
-              ]}
-              hitSlop={{ top: 14, bottom: 14, left: 14, right: 14 }}
-            >
-              <Delete size={22} color={theme.textSecondary} />
-            </TouchableOpacity>
-          )}
-
-          <Text
-            style={[
-              typography.calcDisplay,
-              styles.mainDisplay,
-              {
-                color: theme.text,
-                fontSize: getDynamicFontSize(state.displayValue),
-              },
-            ]}
-            numberOfLines={1}
-            adjustsFontSizeToFit
-          >
-            {state.displayValue}
-          </Text>
-        </View>
+        <Text
+          style={[
+            typography.calcDisplay,
+            styles.mainDisplay,
+            {
+              color: theme.text,
+              fontSize: getDynamicFontSize(state.displayValue),
+            },
+          ]}
+          numberOfLines={1}
+          adjustsFontSizeToFit
+        >
+          {state.displayValue}
+        </Text>
       </View>
 
       {/* Calculator Keypad */}
@@ -570,21 +555,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 6,
     textAlign: 'right',
-  },
-  displayRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    width: '100%',
-  },
-  displayBackspaceBtn: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    marginRight: 10,
   },
   mainDisplay: {
     textAlign: 'right',
