@@ -1,17 +1,43 @@
 {
   "expo": {
-    "name": "sentinel",
+    "name": "Sentinel",
     "slug": "sentinel",
     "version": "1.0.0",
+    "description": "Calculate normally. Be ready when it matters.",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "androidStatusBar": {
+      "hidden": true
+    },
+    "splash": {
+      "backgroundColor": "#090B0E",
+      "resizeMode": "contain"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.sentinel.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Sentinel uses your location to attach exact GPS coordinates to emergency alerts when activated.",
+        "NSContactsUsageDescription": "Sentinel accesses your contacts so you can choose emergency recipients.",
+        "NSFaceIDUsageDescription": "Sentinel uses Face ID to protect emergency settings from unauthorized tampering."
+      }
     },
     "android": {
+      "package": "com.sentinel.app",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CALL_PHONE",
+        "SEND_SMS",
+        "READ_CONTACTS",
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT",
+        "VIBRATE"
+      ],
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#090B0E",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -20,6 +46,28 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Sentinel needs access to location to include your coordinates in emergency messages."
+        }
+      ],
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Sentinel needs access to contacts to import emergency contacts."
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow Sentinel to use Face ID to protect safety settings."
+        }
+      ],
+      "expo-font",
+      "expo-secure-store"
+    ]
   }
 }
